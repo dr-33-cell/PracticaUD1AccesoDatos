@@ -44,8 +44,8 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
         int indiceSeleccionado = vista.comboBox1.getSelectedIndex();
         if (vista.figurasRadioButton.getText().isEmpty() ||
                 vista.videojuego.getText().isEmpty() ||
-                vista.textoPrecio.getText().isEmpty() ||
-                vista.textoTitulo.getText().isEmpty() ||
+                vista.precioTxt.getText().isEmpty() ||
+                vista.tituloTxt.getText().isEmpty() ||
                 vista.nuevoButton.getText().isEmpty() ||
                 vista.importarButton.getText().isEmpty() ||
                 vista.exportarButton.getText().isEmpty())
@@ -68,8 +68,8 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
         vista.nuevoButton.setText(null);
         vista.exportarButton.setText(null);
         vista.importarButton.setText(null);
-        vista.textoTitulo.setText(null);
-        vista.textoPrecio.setText(null);
+        vista.tituloTxt.setText(null);
+        vista.precioTxt.setText(null);
     }
 
     //listener botones
@@ -93,10 +93,10 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
     }
 
     public void refrescar() {
-        vista.dlmVideojuego.clear();
+        vista.dlmProducto.clear();
         //modelo.obtenerVehiculos -> contiene la lista de vehiculos
         for (Producto unVehiculo:modelo.obtenerProducto()) {
-            vista.dlmVideojuego.addElement(unVehiculo);
+            vista.dlmProducto.addElement(unVehiculo);
         }
     }
 
@@ -204,16 +204,17 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) {
             Producto productoSeleccionado = vista.list1.getSelectedValue();
-            vista.matriculaTxt.setText(productoSeleccionado.getMatricula());
-            vista.modeloTxt.setText(productoSeleccionado.getModelo());
-            vista.marcaTxt.setText(productoSeleccionado.getMarca());
-            vista.fechaMatriculacionDPicker.setDate(productoSeleccionado.getFechaMatriculacion());
+            vista.precioTxt.setText(productoSeleccionado.getPrecio());
+            vista.tituloTxt.setText(productoSeleccionado.getTitulo());
+            vista.checkBox1.setText(productoSeleccionado.isStock());
+            vista.idTxt.setText(productoSeleccionado.getId());
+            vista.fechaLanzamientoDPicker.setDate(productoSeleccionado.getFechaLanzamiento());
             if (productoSeleccionado instanceof Producto) {
                 vista.videojuego.doClick();
-                vista.kmsPlazasTxt.setText(String.valueOf(((Videojuego) productoSeleccionado).getNumPlazas()));
+                vista.tituloTxt.setText((Videojuego) productoSeleccionado).getPlataforma();
             } else {
                 vista.figurasRadioButton.doClick();
-                vista.kmsPlazasTxt.setText(String.valueOf(((Figuras)productoSeleccionado).getKms()));
+                vista.tituloTxt.setText((Figuras)productoSeleccionado).getTamanno()));
             }
         }
     }

@@ -6,28 +6,30 @@ import com.github.lgooddatepicker.components.DatePicker;
 import javax.swing.*;
 
 public class Vista {
-     JPanel panel1;
-     JRadioButton figurasRadioButton;
-     JRadioButton videojuego;
-     JComboBox comboBox1;
-     JTextField textoTitulo;
-     JTextField textoPrecio;
-     JButton nuevoButton;
-     JButton importarButton;
-     JButton exportarButton;
-     JList list1;
-     JTextField idTxt;
-     JLabel titulo;
-    private DatePicker fechaLanzamientoDPicker;
+    public JPanel panel1;
+    public JRadioButton figurasRadioButton;
+    public JRadioButton videojuego;
+    public JComboBox comboBox1;
+    public JTextField tituloTxt;
+    public JTextField precioTxt;
+    public JButton nuevoButton;
+    public JButton importarButton;
+    public JButton exportarButton;
+    public JList list1;
+    public JTextField idTxt;
+    public JLabel titulo;
+    public DatePicker fechaLanzamientoDPicker;
+    public JLabel Precio;
+    public JCheckBox checkBox1;
 
     //lo declaro yo
     public JFrame frame;
 
 
     //para poner todos los datos en mi lista
-    public DefaultListModel<Producto> dlmVideojuego;
+    public DefaultListModel<Producto> dlmProducto;
 
-    public Vista(){
+    public Vista() {
         frame = new JFrame("VideojuegoMVC");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -37,9 +39,10 @@ public class Vista {
 
         initComponents();
     }
+
     public void initComponents() {
-        dlmVideojuego=new DefaultListModel<Producto>();
-        list1.setModel(Producto);
+        dlmProducto = new DefaultListModel<Producto>();
+        list1.setModel(dlmProducto);
     }
-    }
+}
 }

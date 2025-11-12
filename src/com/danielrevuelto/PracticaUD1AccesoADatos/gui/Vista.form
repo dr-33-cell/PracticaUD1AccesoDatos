@@ -18,6 +18,8 @@
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:132px:noGrow"/>
     <colspec value="left:6dlu:noGrow"/>
     <colspec value="fill:188px:noGrow"/>
@@ -38,7 +40,7 @@
           <text value="Titulo"/>
         </properties>
       </component>
-      <component id="c7c8e" class="javax.swing.JLabel">
+      <component id="c7c8e" class="javax.swing.JLabel" binding="Precio">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
@@ -58,7 +60,7 @@
       </component>
       <component id="17bf4" class="com.github.lgooddatepicker.components.DatePicker" binding="fechaLanzamientoDPicker">
         <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="2" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties/>
@@ -92,7 +94,7 @@
       </component>
       <component id="fca74" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
         <constraints>
-          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -110,31 +112,31 @@
           </model>
         </properties>
       </component>
-      <component id="f4c47" class="javax.swing.JTextField" binding="textoTitulo">
+      <component id="f4c47" class="javax.swing.JTextField" binding="tituloTxt">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="2" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
-          <text value="TextoTitulo"/>
+          <text value="tituloTxt"/>
         </properties>
       </component>
-      <component id="40614" class="javax.swing.JTextField" binding="textoPrecio">
+      <component id="40614" class="javax.swing.JTextField" binding="precioTxt">
         <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="4" column="2" row-span="2" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
-          <text value="TextoPrecio"/>
+          <text value="precioTxt"/>
         </properties>
       </component>
       <component id="e25f5" class="javax.swing.JButton" binding="nuevoButton" default-binding="true">
         <constraints>
-          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -143,7 +145,7 @@
       </component>
       <component id="a7165" class="javax.swing.JButton" binding="importarButton" default-binding="true">
         <constraints>
-          <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -152,7 +154,7 @@
       </component>
       <component id="ede4c" class="javax.swing.JButton" binding="exportarButton" default-binding="true">
         <constraints>
-          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="18" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -168,29 +170,9 @@
           <text value="Genero"/>
         </properties>
       </component>
-      <component id="2eecf" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties>
-          <text value="Id"/>
-        </properties>
-      </component>
-      <component id="74e68" class="javax.swing.JTextField" binding="idTxt">
-        <constraints>
-          <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="idTxt"/>
-        </properties>
-      </component>
       <scrollpane id="cff96">
         <constraints>
-          <grid row="10" column="2" row-span="5" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="2" row-span="5" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -202,6 +184,44 @@
           </component>
         </children>
       </scrollpane>
+      <component id="2eecf" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Id"/>
+        </properties>
+      </component>
+      <component id="74e68" class="javax.swing.JTextField" binding="idTxt">
+        <constraints>
+          <grid row="10" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="idTxt"/>
+        </properties>
+      </component>
+      <component id="955cd" class="javax.swing.JCheckBox" binding="checkBox1" default-binding="true">
+        <constraints>
+          <grid row="12" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="CheckBox"/>
+        </properties>
+      </component>
+      <component id="4eb4b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Stock"/>
+        </properties>
+      </component>
     </children>
   </grid>
   <buttonGroups>
