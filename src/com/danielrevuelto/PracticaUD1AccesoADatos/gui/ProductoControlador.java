@@ -183,9 +183,11 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
                 break;
             case "Figuras":
                 vista.titulo.setText("Nombre");
+                vista.sizePlat.setText("Tamaño");
                 break;
             case "Videojuego":
                 vista.titulo.setText("Saga");
+                vista.sizePlat.setText("Plataforma");
                 break;
         }
     }
