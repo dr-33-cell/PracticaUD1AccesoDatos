@@ -29,37 +29,37 @@ public class ProductoModelo {
         return listaProductos;
     }
 
-    //altaCoche (Videojuego)
-    public void altaVideojuego(int id, String titulo, String genero, String plataforma, double precio, boolean stock, LocalDate fechaLanzamiento, String texturas) {
-        Videojuego nuevoVideojuego = (Videojuego) new Producto(id, titulo, genero, precio, stock, fechaLanzamiento);
+
+    public void altaVideojuego(int id, String titulo, String genero, double precio, boolean stock, LocalDate fechaLanzamiento, String plataforma) {
+        Videojuego nuevoVideojuego = new Videojuego(id, titulo, genero, precio, stock, fechaLanzamiento, plataforma);
         listaProductos.add(nuevoVideojuego);
     }
 
-    //altaMoto (Figuras)
-    public void altaFiguras(int id, String titulo, String genero, String plataforma, double precio, boolean stock, LocalDate fechaLanzamiento, double tamanno) {
-        Figuras nuevasFiguras = (Figuras) new Producto(id, titulo, genero, precio, stock, fechaLanzamiento);
+
+    public void altaFiguras(int id, String titulo, String genero, double precio, boolean stock, LocalDate fechaLanzamiento, double tamanno) {
+        Figuras nuevasFiguras = new Figuras(id, titulo, genero, precio, stock, fechaLanzamiento, tamanno);
         listaProductos.add(nuevasFiguras);
     }
 
-    //existeMatricula
+
     public boolean existeId(int id) {
         for (Producto unProducto : listaProductos) {
-            if (unProducto.getId() == id) { //preguntar a sebas
+            if (unProducto.getId() == id) {
                 return true;
             }
         }
         return false;
     }
 
-    //exportarXML
+
     public void exportarXML(File fichero) throws ParserConfigurationException, TransformerException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        //implementacion DOM -> web
+
         DOMImplementation dom = builder.getDOMImplementation();
         Document documento = dom.createDocument(null, "xml", null);
 
-        //añado el nodo raiz (primera etiqueta)
+
         Element raiz = documento.createElement("Producto");
         documento.getDocumentElement().appendChild(raiz);
 
@@ -67,8 +67,7 @@ public class ProductoModelo {
         Element nodoDatos = null;
         Text texto = null;
 
-        //voy a añadir una etiqueta dentro de vehiculo
-        //en funcion de si es coche o moto
+
         for (Producto unProducto : listaProductos) {
             if (unProducto instanceof Videojuego) {
                 nodoVideojuego = documento.createElement("Videojuego");
@@ -77,9 +76,7 @@ public class ProductoModelo {
             }
             raiz.appendChild(nodoVideojuego);
 
-            //dentro de la etiqueta vehiculo
-            //tengo coche y moto
-            //atributos comunes (matricula,marca,modelo,fechamatriculacion)
+
 
             nodoDatos = documento.createElement("id");
             nodoVideojuego.appendChild(nodoDatos);
@@ -117,8 +114,7 @@ public class ProductoModelo {
             texto = documento.createTextNode(String.valueOf(unProducto.isStock()));
             nodoDatos.appendChild(texto);
 
-            //como hay un campo que depende del tipo de vehiculo
-            //volvemos a comprobar
+
             if (unProducto instanceof Videojuego) {
                 nodoDatos = documento.createElement("plataforma");
                 nodoVideojuego.appendChild(nodoDatos);
@@ -133,7 +129,7 @@ public class ProductoModelo {
                 nodoDatos.appendChild(texto);
             }
         }
-        //guardo los datos en fichero
+
         Source source = new DOMSource(documento);
         Result result = new StreamResult(fichero);
 
@@ -142,7 +138,7 @@ public class ProductoModelo {
 
     }
 
-    //importarXML
+
     public void importarXML(File fichero) throws ParserConfigurationException, IOException, SAXException {
         listaProductos = new ArrayList<Producto>();
         Videojuego nuevoVideojuego = null;
@@ -159,24 +155,24 @@ public class ProductoModelo {
 
             if (nodoVideojuego.getTagName().equals("Videojuego")) {
                 nuevoVideojuego = new Videojuego();
-                nuevoVideojuego.setPlataforma(nodoVideojuego.getChildNodes().item(0).getTextContent());
-                nuevoVideojuego.setGenero(nodoVideojuego.getChildNodes().item(1).getTextContent());
-                nuevoVideojuego.setId(Integer.parseInt(nodoVideojuego.getChildNodes().item(2).getTextContent()));
+                nuevoVideojuego.setId(Integer.parseInt(nodoVideojuego.getChildNodes().item(0).getTextContent()));
+                nuevoVideojuego.setTitulo(nodoVideojuego.getChildNodes().item(1).getTextContent());
+                nuevoVideojuego.setGenero(nodoVideojuego.getChildNodes().item(2).getTextContent());
                 nuevoVideojuego.setFechaLanzamiento(LocalDate.parse(nodoVideojuego.getChildNodes().item(3).getTextContent()));
                 nuevoVideojuego.setPrecio(Double.parseDouble(nodoVideojuego.getChildNodes().item(4).getTextContent()));
                 nuevoVideojuego.setStock(Boolean.parseBoolean(nodoVideojuego.getChildNodes().item(5).getTextContent()));
-                nuevoVideojuego.setTitulo(nodoVideojuego.getChildNodes().item(6).getTextContent());
+                nuevoVideojuego.setPlataforma(nodoVideojuego.getChildNodes().item(0).getTextContent());
                 listaProductos.add(nuevoVideojuego);
             } else {
                 if (nodoVideojuego.getTagName().equals("Figuras")) {
                     nuevasFiguras = new Figuras();
-                    nuevasFiguras.setTamanno(Double.parseDouble(nodoVideojuego.getChildNodes().item(0).getTextContent()));
-                    nuevasFiguras.setGenero(nodoVideojuego.getChildNodes().item(1).getTextContent());
-                    nuevasFiguras.setId(Integer.parseInt(nodoVideojuego.getChildNodes().item(2).getTextContent()));
+                    nuevasFiguras.setId(Integer.parseInt(nodoVideojuego.getChildNodes().item(0).getTextContent()));
+                    nuevasFiguras.setTitulo(nodoVideojuego.getChildNodes().item(1).getTextContent());
+                    nuevasFiguras.setGenero(nodoVideojuego.getChildNodes().item(2).getTextContent());
                     nuevasFiguras.setFechaLanzamiento(LocalDate.parse(nodoVideojuego.getChildNodes().item(3).getTextContent()));
                     nuevasFiguras.setPrecio(Double.parseDouble(nodoVideojuego.getChildNodes().item(4).getTextContent()));
                     nuevasFiguras.setStock(Boolean.parseBoolean(nodoVideojuego.getChildNodes().item(5).getTextContent()));
-                    nuevasFiguras.setTitulo(nodoVideojuego.getChildNodes().item(6).getTextContent());
+                    nuevasFiguras.setTamanno(Double.parseDouble(nodoVideojuego.getChildNodes().item(6).getTextContent()));
                     listaProductos.add(nuevasFiguras);
                 }
 

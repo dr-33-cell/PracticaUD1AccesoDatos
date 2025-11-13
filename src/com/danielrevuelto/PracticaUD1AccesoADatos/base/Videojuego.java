@@ -27,6 +27,6 @@ public class Videojuego extends Producto {
 
     @Override
     public String toString() {
-        return "Stickers:" + getGenero()+" "+getPlataforma() +" "+getTitulo()+" "+getFechaLanzamiento()+" "+getId()+" "+getPrecio()+" "+getClass();
+        return "Videojuego:" + getGenero()+" "+getPlataforma() +" "+getTitulo()+" "+getFechaLanzamiento()+" "+getId()+" "+getPrecio()+" "+getClass();
     }
 }

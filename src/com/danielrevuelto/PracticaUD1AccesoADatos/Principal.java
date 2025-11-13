@@ -8,7 +8,7 @@ public class Principal {
     public static void main(String[] args) {
 
         Vista vista = new Vista();
-        ProductoModelo ProductoModelo = new ProductoModelo();
-        ProductoControlador productoControlador = new ProductoControlador(vista, ProductoModelo);
+        ProductoModelo productoModelo = new ProductoModelo();
+        ProductoControlador productoControlador = new ProductoControlador(vista, productoModelo);
     }
 }

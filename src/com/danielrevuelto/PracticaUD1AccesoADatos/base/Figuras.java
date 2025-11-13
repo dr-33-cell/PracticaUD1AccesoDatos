@@ -6,7 +6,7 @@ public class Figuras extends Producto {
 
     double tamanno;
 
-    public  Figuras(){
+    public Figuras() {
 
     }
 
@@ -25,8 +25,8 @@ public class Figuras extends Producto {
 
     @Override
     public String toString() {
-        return "Figuras:" + getGenero()+" "+getPlataforma()
-                +" "+getTitulo()+" " +getTamanno()
-                +" "+getFechaLanzamiento()+" "+getId()+" "+getPrecio()+" "+getClass();
+        return "Figuras:" + getGenero() + " "
+                + " " + getTitulo() + " " + getTamanno()
+                + " " + getFechaLanzamiento() + " " + getId() + " " + getPrecio() + " " + getClass();
     }
 }

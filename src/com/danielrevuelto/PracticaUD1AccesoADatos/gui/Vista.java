@@ -8,8 +8,8 @@ import javax.swing.*;
 public class Vista {
     public JPanel panel1;
     public JRadioButton figurasRadioButton;
-    public JRadioButton videojuego;
-    public JComboBox comboBox1;
+    public JRadioButton videojuegoRadioButton;
+    public JComboBox generoComboBox;
     public JTextField tituloTxt;
     public JTextField precioTxt;
     public JButton nuevoButton;
@@ -20,7 +20,11 @@ public class Vista {
     public JLabel titulo;
     public DatePicker fechaLanzamientoDPicker;
     public JLabel Precio;
-    public JCheckBox checkBox1;
+    public JCheckBox stockCheckBox;
+    public JLabel formatoTxt;
+    public JLabel id;
+    public JLabel sizePlat;
+    public JTextField sizePlatTxt;
 
     //lo declaro yo
     public JFrame frame;
@@ -45,4 +49,4 @@ public class Vista {
         list1.setModel(dlmProducto);
     }
 }
-}
+

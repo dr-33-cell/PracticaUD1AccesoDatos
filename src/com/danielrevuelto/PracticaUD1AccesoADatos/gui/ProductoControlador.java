@@ -41,35 +41,25 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
     }
 
     private boolean hayCamposVacios() {
-        int indiceSeleccionado = vista.comboBox1.getSelectedIndex();
-        if (vista.figurasRadioButton.getText().isEmpty() ||
-                vista.videojuego.getText().isEmpty() ||
-                vista.precioTxt.getText().isEmpty() ||
-                vista.tituloTxt.getText().isEmpty() ||
-                vista.nuevoButton.getText().isEmpty() ||
-                vista.importarButton.getText().isEmpty() ||
-                vista.exportarButton.getText().isEmpty())
+            if (vista.tituloTxt.getText().isEmpty() ||
+                    vista.precioTxt.getText().isEmpty() ||
+                    vista.fechaLanzamientoDPicker.getDate()== null ||
+                    vista.idTxt.getText().isEmpty()){
+                return true;
+            }
 
-
-        if (indiceSeleccionado != -1) {
-            System.out.println("El índice seleccionado es: " + indiceSeleccionado);
-
-        } else {
-            System.out.println("No hay ningún elemento seleccionado.");
-        }{
-            return true;
-        }
-        return false;
+            return false;
     }
 
     private void limpiarCampos() {
-        vista.figurasRadioButton.setText(null);
-        vista.videojuego.setText(null);
-        vista.nuevoButton.setText(null);
-        vista.exportarButton.setText(null);
-        vista.importarButton.setText(null);
-        vista.tituloTxt.setText(null);
-        vista.precioTxt.setText(null);
+        vista.tituloTxt.setText("");
+        vista.precioTxt.setText("");
+        vista.idTxt.setText("");
+        vista.fechaLanzamientoDPicker.setDate(null);
+        vista.stockCheckBox.setSelected(false);
+        vista.generoComboBox.setSelectedIndex(0);
+        vista.videojuegoRadioButton.setSelected(false);
+        vista.figurasRadioButton.setSelected(false);
     }
 
     //listener botones
@@ -78,8 +68,9 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
         vista.exportarButton.addActionListener(listener);
         vista.nuevoButton.addActionListener(listener);
         vista.figurasRadioButton.addActionListener(listener);
-        vista.videojuego.addActionListener(listener);
-        vista.comboBox1.addActionListener(listener);
+        vista.videojuegoRadioButton.addActionListener(listener);
+        vista.generoComboBox.addActionListener(listener);
+        vista.stockCheckBox.addActionListener(listener);
     }
 
     //listener ventana (boton cerrar)
@@ -102,7 +93,7 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
 
     private void cargarDatosConfiguracion() throws IOException {
         Properties configuracion = new Properties();
-        configuracion.load(new FileReader("vehiculos.conf"));
+        configuracion.load(new FileReader("productos.conf"));
         ultimaRutaExportada= new File(configuracion.getProperty("ultimaRutaExportada"));
     }
 
@@ -114,8 +105,8 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
         Properties configuracion=new Properties();
         configuracion.setProperty("ultimaRutaExportada"
                 ,ultimaRutaExportada.getAbsolutePath());
-        configuracion.store(new PrintWriter("vehiculos.conf")
-                ,"Datos configuracion vehiculos");
+        configuracion.store(new PrintWriter("productos.conf")
+                ,"Datos configuracion productos");
     }
 
     @Override
@@ -126,23 +117,35 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
             case "Nuevo":
                 if (hayCamposVacios()) {
                     Util.mensajeError("Los siguientes campos estan vacios " +
-                            "\n Matricula\nMarca\nModelo\nFecha matriculacion" +
-                            "\n"+vista.kmsPlazasLbl.getText());
+                            "\n Id\nTitulo\nGenero\nPrecio\nStock\nFecha de Lanzamiento" +
+                            "\n"+vista.tituloTxt.getText());
                     break;
                 }
-                if (modelo.existeId(Integer.parseInt(vista.idTxt.getText()))) {
+
+                int id = 0;
+                try{
+                    id = Integer.parseInt(vista.idTxt.getText());
+                } catch (NumberFormatException ne){
+                    Util.mensajeError("Introduce bien el ID (numerito)");
+                    break;
+                }
+
+                if (modelo.existeId(id)) {
                     Util.mensajeError("Ya existe un videojuego con ese id" +
                             "\n"+vista.idTxt.getText());
                     break;
                 }
-                if (vista.videojuego.isSelected()) {
-                    modelo.altaVideojuego(vista.matriculaTxt.getText(),vista.marcaTxt.getText(),
-                            vista.modeloTxt.getText(),vista.fechaMatriculacionDPicker.getDate()
-                            , Integer.parseInt(vista.kmsPlazasTxt.getText()));
-                } else {
-                    modelo.altaFiguras(vista.matriculaTxt.getText(),vista.marcaTxt.getText(),
-                            vista.modeloTxt.getText(),vista.fechaMatriculacionDPicker.getDate()
-                            , Double.parseDouble(vista.kmsPlazasTxt.getText()));
+
+                try {
+                    if (vista.videojuegoRadioButton.isSelected()) {
+                        modelo.altaVideojuego(id, vista.tituloTxt.getText(), vista.generoComboBox.getSelectedItem().toString(),
+                                (Double.parseDouble(vista.precioTxt.getText())), vista.stockCheckBox.isSelected(), vista.fechaLanzamientoDPicker.getDate(), vista.tituloTxt.getText());
+                    } else {
+                        modelo.altaFiguras(id, vista.tituloTxt.getText(), vista.generoComboBox.getSelectedItem().toString(),
+                                Double.parseDouble(vista.precioTxt.getText()), vista.stockCheckBox.isSelected(), vista.fechaLanzamientoDPicker.getDate(), Double.parseDouble(vista.precioTxt.getText()));
+                    }
+                }catch (NumberFormatException ne) {
+                    Util.mensajeError("Introduce decimales");
                 }
                 limpiarCampos();
                 refrescar();
@@ -189,13 +192,15 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
 
     @Override
     public void windowClosing(WindowEvent e) {
-        int resp= Util.mensajeConfirmacion("¿Desea cerrar la ventana?","Salir");
-        if (resp== JOptionPane.OK_OPTION) {
+        int resp = Util.mensajeConfirmacion("¿Desea cerrar la ventana?", "Salir");
+        if (resp == JOptionPane.OK_OPTION) {
             try {
                 guardarConfiguracion();
-                System.exit(0);
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error al guardar configuración");
+            } finally {
+                System.exit(0);
             }
         }
     }
@@ -203,23 +208,23 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) {
-            Producto productoSeleccionado = vista.list1.getSelectedValue();
-            vista.precioTxt.setText(productoSeleccionado.getPrecio());
+            Producto productoSeleccionado = (Producto) vista.list1.getSelectedValue();
+            vista.precioTxt.setText(String.valueOf(productoSeleccionado.getPrecio()));
             vista.tituloTxt.setText(productoSeleccionado.getTitulo());
-            vista.checkBox1.setText(productoSeleccionado.isStock());
-            vista.idTxt.setText(productoSeleccionado.getId());
+            vista.stockCheckBox.setText(String.valueOf(productoSeleccionado.isStock()));
+            vista.idTxt.setText(String.valueOf(productoSeleccionado.getId()));
             vista.fechaLanzamientoDPicker.setDate(productoSeleccionado.getFechaLanzamiento());
-            if (productoSeleccionado instanceof Producto) {
-                vista.videojuego.doClick();
-                vista.tituloTxt.setText((Videojuego) productoSeleccionado).getPlataforma();
+            if (productoSeleccionado instanceof Videojuego) {
+                vista.videojuegoRadioButton.doClick();
+                vista.tituloTxt.setText(String.valueOf(((Videojuego) productoSeleccionado).getPlataforma()));
             } else {
                 vista.figurasRadioButton.doClick();
-                vista.tituloTxt.setText((Figuras)productoSeleccionado).getTamanno()));
+                vista.tituloTxt.setText(String.valueOf(((Figuras)productoSeleccionado).getTamanno()));
             }
         }
     }
 
-    //no los uso
+
 
     @Override
     public void windowOpened(WindowEvent e) {
