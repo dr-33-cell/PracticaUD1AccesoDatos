@@ -75,6 +75,7 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
         vista.generoComboBox.setSelectedIndex(0);
         vista.videojuegoRadioButton.setSelected(false);
         vista.figurasRadioButton.setSelected(false);
+        vista.sizePlatTxt.setText("");
     }
 
     //listener botones
