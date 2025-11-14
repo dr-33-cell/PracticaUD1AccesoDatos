@@ -41,6 +41,7 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
     }
 
     private boolean hayCamposVacios() {
+        StringBuilder camposVacios = new StringBuilder();
             if (vista.tituloTxt.getText().isEmpty() ||
                     vista.precioTxt.getText().isEmpty() ||
                     vista.fechaLanzamientoDPicker.getDate()== null ||
@@ -71,6 +72,7 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
         vista.videojuegoRadioButton.addActionListener(listener);
         vista.generoComboBox.addActionListener(listener);
         vista.stockCheckBox.addActionListener(listener);
+        vista.limpiarButton.addActionListener(listener);
     }
 
     //listener ventana (boton cerrar)
@@ -85,9 +87,9 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
 
     public void refrescar() {
         vista.dlmProducto.clear();
-        //modelo.obtenerVehiculos -> contiene la lista de vehiculos
-        for (Producto unVehiculo:modelo.obtenerProducto()) {
-            vista.dlmProducto.addElement(unVehiculo);
+        //modelo.obtenerProducto -> contiene la lista de productos
+        for (Producto unProducto:modelo.obtenerProducto()) {
+            vista.dlmProducto.addElement(unProducto);
         }
     }
 
@@ -131,7 +133,7 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
                 }
 
                 if (modelo.existeId(id)) {
-                    Util.mensajeError("Ya existe un videojuego con ese id" +
+                    Util.mensajeError("Ya existe un producto con ese id" +
                             "\n"+vista.idTxt.getText());
                     break;
                 }
@@ -188,6 +190,9 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
             case "Videojuego":
                 vista.titulo.setText("Saga");
                 vista.sizePlat.setText("Plataforma");
+                break;
+            case "Limpiar":
+                limpiarCampos();
                 break;
         }
     }

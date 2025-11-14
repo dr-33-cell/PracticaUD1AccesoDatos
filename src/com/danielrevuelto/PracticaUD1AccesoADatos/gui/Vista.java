@@ -25,6 +25,7 @@ public class Vista {
     public JLabel id;
     public JLabel sizePlat;
     public JTextField sizePlatTxt;
+    public JButton limpiarButton;
 
     //lo declaro yo
     public JFrame frame;
