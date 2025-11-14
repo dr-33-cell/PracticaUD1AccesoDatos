@@ -132,7 +132,7 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
         switch (actionCommand) {
             case "Nuevo":
                 if (hayCamposVacios()) {
-                   
+
                     break;
                 }
 
@@ -141,6 +141,13 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
                     id = Integer.parseInt(vista.idTxt.getText());
                 } catch (NumberFormatException ne){
                     Util.mensajeError("Introduce bien el ID (numerito)");
+                    break;
+                }
+                 id = Integer.parseInt(vista.idTxt.getText());
+                double precio = Double.parseDouble(vista.precioTxt.getText());
+
+                if (id < 0 || precio < 0) {
+                    Util.mensajeError("El precio y el Id no pueden ser números negativos");
                     break;
                 }
 
