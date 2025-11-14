@@ -42,12 +42,26 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
 
     private boolean hayCamposVacios() {
         StringBuilder camposVacios = new StringBuilder();
-            if (vista.tituloTxt.getText().isEmpty() ||
-                    vista.precioTxt.getText().isEmpty() ||
-                    vista.fechaLanzamientoDPicker.getDate()== null ||
-                    vista.idTxt.getText().isEmpty()){
-                return true;
+
+        if (vista.tituloTxt.getText().isEmpty()){
+            camposVacios.append("\n-Titulo del producto");
+        }
+        if(vista.precioTxt.getText().isEmpty()){
+            camposVacios.append("\n-Precio del producto");
+        }
+        if (vista.fechaLanzamientoDPicker.getDate()== null){
+            camposVacios.append("\n-Fecha de Lanzamiento del producto");
+        }
+        if(vista.idTxt.getText().isEmpty()){
+            camposVacios.append("\n-Id del producto");
+        }
+        if (vista.sizePlatTxt.getText().isEmpty()){
+            camposVacios.append("\n-Tamaño/Plataforma del producto");
             }
+        if (camposVacios.length()>0){
+            Util.mensajeError("Los siguientes campos estan vacios: "+ camposVacios.toString());
+            return true;
+        }
 
             return false;
     }
@@ -118,9 +132,7 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
         switch (actionCommand) {
             case "Nuevo":
                 if (hayCamposVacios()) {
-                    Util.mensajeError("Los siguientes campos estan vacios " +
-                            "\n Id\nTitulo\nGenero\nPrecio\nStock\nFecha de Lanzamiento" +
-                            "\n"+vista.tituloTxt.getText());
+                   
                     break;
                 }
 
