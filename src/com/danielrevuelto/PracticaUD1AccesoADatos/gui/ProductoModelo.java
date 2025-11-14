@@ -30,14 +30,14 @@ public class ProductoModelo {
     }
 
 
-    public void altaVideojuego(int id, String titulo, String genero, double precio, boolean stock, LocalDate fechaLanzamiento, String plataforma) {
-        Videojuego nuevoVideojuego = new Videojuego(id, titulo, genero, precio, stock, fechaLanzamiento, plataforma);
+    public void altaVideojuego( String titulo, String genero, double precio, LocalDate fechaLanzamiento, int id, boolean stock,  String plataforma) {
+        Videojuego nuevoVideojuego = new Videojuego(titulo, genero, precio, fechaLanzamiento, id,stock, plataforma);
         listaProductos.add(nuevoVideojuego);
     }
 
 
-    public void altaFiguras(int id, String titulo, String genero, double precio, boolean stock, LocalDate fechaLanzamiento, double tamanno) {
-        Figuras nuevasFiguras = new Figuras(id, titulo, genero, precio, stock, fechaLanzamiento, tamanno);
+    public void altaFiguras(String titulo, String genero, double precio, LocalDate fechaLanzamiento, int id, boolean stock, double tamanno) {
+        Figuras nuevasFiguras = new Figuras(titulo, genero, precio, fechaLanzamiento, id, stock, tamanno);
         listaProductos.add(nuevasFiguras);
     }
 
@@ -161,7 +161,7 @@ public class ProductoModelo {
                 nuevoVideojuego.setFechaLanzamiento(LocalDate.parse(nodoVideojuego.getChildNodes().item(3).getTextContent()));
                 nuevoVideojuego.setPrecio(Double.parseDouble(nodoVideojuego.getChildNodes().item(4).getTextContent()));
                 nuevoVideojuego.setStock(Boolean.parseBoolean(nodoVideojuego.getChildNodes().item(5).getTextContent()));
-                nuevoVideojuego.setPlataforma(nodoVideojuego.getChildNodes().item(0).getTextContent());
+                nuevoVideojuego.setPlataforma(nodoVideojuego.getChildNodes().item(6).getTextContent());
                 listaProductos.add(nuevoVideojuego);
             } else {
                 if (nodoVideojuego.getTagName().equals("Figuras")) {

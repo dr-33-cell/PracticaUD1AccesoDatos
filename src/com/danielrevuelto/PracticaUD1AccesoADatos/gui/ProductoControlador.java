@@ -160,11 +160,11 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
 
                 try {
                     if (vista.videojuegoRadioButton.isSelected()) {
-                        modelo.altaVideojuego(id, vista.tituloTxt.getText(), vista.generoComboBox.getSelectedItem().toString(),
-                                (Double.parseDouble(vista.precioTxt.getText())), vista.stockCheckBox.isSelected(), vista.fechaLanzamientoDPicker.getDate(), vista.tituloTxt.getText());
+                        modelo.altaVideojuego(vista.generoComboBox.getSelectedItem().toString(),vista.tituloTxt.getText(),
+                                (Double.parseDouble(vista.precioTxt.getText())),vista.fechaLanzamientoDPicker.getDate(), id,vista.stockCheckBox.isSelected(), vista.sizePlatTxt.getText());
                     } else {
-                        modelo.altaFiguras(id, vista.tituloTxt.getText(), vista.generoComboBox.getSelectedItem().toString(),
-                                Double.parseDouble(vista.precioTxt.getText()), vista.stockCheckBox.isSelected(), vista.fechaLanzamientoDPicker.getDate(), Double.parseDouble(vista.precioTxt.getText()));
+                        modelo.altaFiguras( vista.tituloTxt.getText(), vista.generoComboBox.getSelectedItem().toString(),
+                                Double.parseDouble(vista.precioTxt.getText()),  vista.fechaLanzamientoDPicker.getDate(), id, vista.stockCheckBox.isSelected(),Double.parseDouble(vista.sizePlatTxt.getText()));
                     }
                 }catch (NumberFormatException ne) {
                     Util.mensajeError("Introduce decimales");
@@ -243,10 +243,10 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
             vista.fechaLanzamientoDPicker.setDate(productoSeleccionado.getFechaLanzamiento());
             if (productoSeleccionado instanceof Videojuego) {
                 vista.videojuegoRadioButton.doClick();
-                vista.tituloTxt.setText(String.valueOf(((Videojuego) productoSeleccionado).getPlataforma()));
+                vista.sizePlatTxt.setText(String.valueOf(((Videojuego) productoSeleccionado).getPlataforma()));
             } else {
                 vista.figurasRadioButton.doClick();
-                vista.tituloTxt.setText(String.valueOf(((Figuras)productoSeleccionado).getTamanno()));
+                vista.sizePlatTxt.setText(String.valueOf(((Figuras)productoSeleccionado).getTamanno()));
             }
         }
     }

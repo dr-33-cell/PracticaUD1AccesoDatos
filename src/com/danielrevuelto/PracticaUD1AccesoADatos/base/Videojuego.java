@@ -12,7 +12,7 @@ public class Videojuego extends Producto {
 
 
 
-    public Videojuego(int id, String titulo, String genero, double precio, boolean stock, LocalDate fechaLanzamiento, String plataforma) {
+    public Videojuego(String titulo, String genero, double precio, LocalDate fechaLanzamiento, int id,   boolean stock,String plataforma) {
         super(id, titulo, genero, precio, stock, fechaLanzamiento);
         this.plataforma = plataforma;
     }

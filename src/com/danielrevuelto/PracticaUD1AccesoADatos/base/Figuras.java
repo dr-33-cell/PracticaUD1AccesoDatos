@@ -10,7 +10,7 @@ public class Figuras extends Producto {
 
     }
 
-    public Figuras(int id, String titulo, String genero, double precio, boolean stock, LocalDate fechaLanzamiento, double tamanno) {
+    public Figuras(String titulo, String genero, double precio,  LocalDate fechaLanzamiento, int id,  boolean stock, double tamanno) {
         super(id, titulo, genero, precio, stock, fechaLanzamiento);
         this.tamanno = tamanno;
     }
