@@ -35,7 +35,7 @@ public class Vista {
     public DefaultListModel<Producto> dlmProducto;
 
     public Vista() {
-        frame = new JFrame("VideojuegoMVC");
+        frame = new JFrame("ProductosMVC");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();

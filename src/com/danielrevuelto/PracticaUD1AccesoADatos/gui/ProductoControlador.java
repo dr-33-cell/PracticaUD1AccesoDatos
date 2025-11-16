@@ -160,10 +160,10 @@ public class ProductoControlador implements ActionListener, ListSelectionListene
 
                 try {
                     if (vista.videojuegoRadioButton.isSelected()) {
-                        modelo.altaVideojuego(vista.generoComboBox.getSelectedItem().toString(),vista.tituloTxt.getText(),
-                                (Double.parseDouble(vista.precioTxt.getText())),vista.fechaLanzamientoDPicker.getDate(), id,vista.stockCheckBox.isSelected(), vista.sizePlatTxt.getText());
+                        modelo.altaVideojuego(vista.tituloTxt.getText(), vista.generoComboBox.getSelectedItem().toString(),
+                                (Double.parseDouble(vista.precioTxt.getText())), vista.fechaLanzamientoDPicker.getDate(), id,vista.stockCheckBox.isSelected(), vista.sizePlatTxt.getText());
                     } else {
-                        modelo.altaFiguras( vista.tituloTxt.getText(), vista.generoComboBox.getSelectedItem().toString(),
+                        modelo.altaFiguras(vista.tituloTxt.getText(), vista.generoComboBox.getSelectedItem().toString(),
                                 Double.parseDouble(vista.precioTxt.getText()),  vista.fechaLanzamientoDPicker.getDate(), id, vista.stockCheckBox.isSelected(),Double.parseDouble(vista.sizePlatTxt.getText()));
                     }
                 }catch (NumberFormatException ne) {
